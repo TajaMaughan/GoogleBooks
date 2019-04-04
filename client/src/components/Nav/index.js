@@ -1,15 +1,13 @@
 import React from "react";
-import Nav from "react-bootstrap/Nav";
 
-const Navbar = () => {
+function Nav() {
   return (
-    <Nav>
-      <Nav.Item>
-        <Nav.Link href="/">Search</Nav.Link>
-        <Nav.Link>Saved</Nav.Link>
-      </Nav.Item>
-    </Nav>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a className="navbar-brand" href="/">
+        React Reading List
+      </a>
+    </nav>
   );
-};
+}
 
-export default Navbar;
+export default Nav;
