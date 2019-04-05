@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
+// import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 // import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
+import { Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Search";
 
@@ -27,45 +27,67 @@ class Books extends Component {
       this.setState({
         results: res.data
       });
-      console.log("reached");
+    });
+    this.setState({ searchTerm: "" });
+  };
+
+  handleSaveClick = event => {
+    event.preventDefault();
+    console.log(event.currentTarget.getAttribute("data-i"));
+    let index = parseInt(event.currentTarget.getAttribute("data-i"));
+    let info = this.state.results[index].volumeInfo;
+    API.saveBook({
+      title: info.title,
+      authors: info.authors,
+      desription: info.description,
+      link: info.infoLink,
+      image: info.imageLinks.smallThumbnail
     });
   };
 
   render() {
     return (
       <Container fluid>
-            <Jumbotron>
-              <h1>Google Books search</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.searchTerm}
-                onChange={this.handleInputChange}
-                name="searchTerm"
-                placeholder="Title (required)"
-              />
-              <FormBtn
-                disabled={!this.state.searchTerm}
-                onClick={this.handleFormSubmit}
-              >
-                Search Google Books
-              </FormBtn>
-            </form>
+        <Jumbotron>
+          <h1>Google Books search</h1>
+        </Jumbotron>
+        <form>
+          <Input
+            value={this.state.searchTerm}
+            onChange={this.handleInputChange}
+            name="searchTerm"
+            placeholder="Title (required)"
+          />
+          <FormBtn
+            disabled={!this.state.searchTerm}
+            onClick={this.handleFormSubmit}
+          >
+            Search Google Books
+          </FormBtn>
+        </form>
 
-            {this.state.results.length ? (
-              <List>
-                {this.state.results.map(result => (
-                  <ListItem key={result.id}>
-                    <a href={result.volumeInfo.infoLink} target="_blank"><strong>
-                      {result.volumeInfo.title} by {result.volumeInfo.authors}
-                    </strong></a>
-                    <DeleteBtn onClick={() => this.deleteBook()} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
+        {this.state.results.length ? (
+          <List>
+            {this.state.results.map((result, index) => (
+              <ListItem key={result.id}>
+                <a
+                  href={result.volumeInfo.infoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>
+                    {result.volumeInfo.title} by {result.volumeInfo.authors}
+                  </strong>
+                </a>
+                <button onClick={this.handleSaveClick} data-i={index}>
+                  Save
+                </button>
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <h3>No Results to Display</h3>
+        )}
       </Container>
     );
   }
