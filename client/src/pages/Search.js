@@ -79,6 +79,7 @@ class Books extends Component {
                     {result.volumeInfo.title} by {result.volumeInfo.authors}
                   </strong>
                 </a>
+                <p>{result.volumeInfo.description}</p>
                 <button onClick={this.handleSaveClick} data-i={index}>
                   Save
                 </button>
