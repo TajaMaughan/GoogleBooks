@@ -16,8 +16,8 @@ if (process.env.NODE_ENV === "production") {
 app.use("/", routes);
 
 // Connect to the Mongo DB
-const mongoURL = process.env.PROD_MONGODB || "mongodb://localhost:27017/googlebooks"
-mongoose.connect(mongoURL, {useNewUrlParser: true})
+// const mongoURL = process.env.PROD_MONGODB || "mongodb://localhost:27017/googlebooks"
+mongoose.connect(process.env.PROD_MONGODB || "mongodb://localhost:27017/googlebooks", {useNewUrlParser: true})
   .then(() => {
     console.log("Successfully connected to database.");
   })
