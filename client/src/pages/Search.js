@@ -29,15 +29,6 @@ class Books extends Component {
       });
       console.log("reached");
     });
-    // if (this.state.title && this.state.author) {
-    //   API.saveBook({
-    //     title: this.state.title,
-    //     author: this.state.author,
-    //     synopsis: this.state.synopsis
-    //   })
-    //     .then(res => this.loadBooks())
-    //     .catch(err => console.log(err));
-    // }
   };
 
   render() {
@@ -65,9 +56,9 @@ class Books extends Component {
               <List>
                 {this.state.results.map(result => (
                   <ListItem key={result.id}>
-                    <strong>
+                    <a href={result.volumeInfo.infoLink} target="_blank"><strong>
                       {result.volumeInfo.title} by {result.volumeInfo.authors}
-                    </strong>
+                    </strong></a>
                     <DeleteBtn onClick={() => this.deleteBook()} />
                   </ListItem>
                 ))}
