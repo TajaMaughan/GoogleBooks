@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import API from "../utils/API";
-// import DeleteBtn from "../components/DeleteBtn";
-// import Jumbotron from "../components/Jumbotron";
-// import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
