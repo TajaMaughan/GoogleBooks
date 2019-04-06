@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-// import DeleteBtn from "../components/DeleteBtn";
+// import Jumbotron from "react-bootstrap/Jumbotron";
+// import Container from "react-bootstrap/Container";
+// import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-// import { Link } from "react-router-dom";
-import { Container } from "../components/Grid";
+import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Search";
 
@@ -39,7 +41,7 @@ class Books extends Component {
     API.saveBook({
       title: info.title,
       authors: info.authors,
-      desription: info.description,
+      description: info.description,
       link: info.infoLink,
       image: info.imageLinks.smallThumbnail
     });
@@ -48,6 +50,8 @@ class Books extends Component {
   render() {
     return (
       <Container fluid>
+        <Row>
+        <Col size="sm-12">  
         <Jumbotron>
           <h1>Google Books search</h1>
         </Jumbotron>
@@ -56,7 +60,7 @@ class Books extends Component {
             value={this.state.searchTerm}
             onChange={this.handleInputChange}
             name="searchTerm"
-            placeholder="Title (required)"
+            placeholder="Search Term"
           />
           <FormBtn
             disabled={!this.state.searchTerm}
@@ -65,7 +69,8 @@ class Books extends Component {
             Search Google Books
           </FormBtn>
         </form>
-
+        </Col>
+        </Row>
         {this.state.results.length ? (
           <List>
             {this.state.results.map((result, index) => (
