@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
-import { Col, Row, Container } from "../components/Grid";
+// import DeleteBtn from "../components/DeleteBtn";
+// import Jumbotron from "../components/Jumbotron";
+// import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col"
 
 class Saved extends Component {
   state = {
@@ -64,7 +68,7 @@ class Saved extends Component {
                       </a>
                     </strong>
                     <p>{book.description}</p>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                    <button onClick={() => this.deleteBook(book._id)}>Delete</button>
                   </ListItem>
                 ))}
               </List>

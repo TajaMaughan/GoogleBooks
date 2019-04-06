@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-// import Jumbotron from "react-bootstrap/Jumbotron";
-// import Container from "react-bootstrap/Container";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-import Jumbotron from "../components/Jumbotron";
+import Jumbotron from "react-bootstrap/Jumbotron";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import API from "../utils/API";
-import { Col, Row, Container } from "../components/Grid";
+// import Jumbotron from "../components/Jumbotron";
+// import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Search";
 
