@@ -1,0 +1,21 @@
+body {
+    background-color: #006762;
+}
+
+.navbar {
+    background-color: #f8c113;
+}
+
+.jumbotron {
+    background-color: #92c3aa;
+    color: #062d42;
+}
+
+.nav-text {
+    color: #062d42;
+}
+
+.btn {
+    background-color: rgb(248, 193, 19, 1);
+    color: #062d42;
+}
