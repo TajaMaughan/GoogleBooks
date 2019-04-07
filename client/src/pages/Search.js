@@ -3,6 +3,8 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 import API from "../utils/API";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Search";
@@ -41,58 +43,70 @@ class Books extends Component {
       authors: info.authors,
       description: info.description,
       link: info.infoLink,
-      image: info.imageLinks.smallThumbnail
+      image: info.imageLinks.thumbnail
     });
   };
 
   render() {
     return (
-      <Container fluid>
-        <Row>
-        <Col size="sm-12">  
-        <Jumbotron>
-          <h1>Google Books search</h1>
-        </Jumbotron>
-        <form>
-          <Input
-            value={this.state.searchTerm}
-            onChange={this.handleInputChange}
-            name="searchTerm"
-            placeholder="Search Term"
-          />
-          <FormBtn
-            disabled={!this.state.searchTerm}
-            onClick={this.handleFormSubmit}
-          >
-            Search Google Books
-          </FormBtn>
-        </form>
-        </Col>
-        </Row>
-        {this.state.results.length ? (
-          <List>
-            {this.state.results.map((result, index) => (
-              <ListItem key={result.id}>
-                <a
-                  href={result.volumeInfo.infoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <strong>
-                    {result.volumeInfo.title} by {result.volumeInfo.authors}
-                  </strong>
-                </a>
-                <p>{result.volumeInfo.description}</p>
-                <button onClick={this.handleSaveClick} data-i={index}>
-                  Save
-                </button>
-              </ListItem>
-            ))}
-          </List>
-        ) : (
-          <h3>No Results to Display</h3>
-        )}
-      </Container>
+      <div>
+        <Container fluid>
+          <Row>
+            <Col>
+              <Jumbotron className="jumbotron">
+                <h1 className="text-center">Google Books Search</h1>
+              </Jumbotron>
+            </Col>
+          </Row>
+        </Container>
+        <Container>
+          <Row>
+            <Col xs={10}>
+              <Input
+                value={this.state.searchTerm}
+                onChange={this.handleInputChange}
+                name="searchTerm"
+                placeholder="Search Term"
+              />
+            </Col>
+            <Col xs={2}>
+              <FormBtn
+                disabled={!this.state.searchTerm}
+                onClick={this.handleFormSubmit}
+              >
+                Search
+              </FormBtn>
+            </Col>
+          </Row>
+          {this.state.results.length ? (
+            <List>
+              {this.state.results.map((result, index) => (
+                <ListItem key={result.id}>
+                  <a
+                    href={result.volumeInfo.infoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <strong>
+                      {result.volumeInfo.title} by {result.volumeInfo.authors}
+                    </strong>
+                  </a>
+                  <Image
+                    src={result.volumeInfo.imageLinks.thumbnail}
+                    className="float-left mr-4"
+                  />
+                  <p>{result.volumeInfo.description}</p>
+                  <button className="btn" onClick={this.handleSaveClick} data-i={index}>
+                    Save
+                  </button>
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <h3 className="text-center">No Results to Display</h3>
+          )}
+        </Container>
+      </div>
     );
   }
 }

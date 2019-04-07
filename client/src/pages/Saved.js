@@ -5,6 +5,8 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col"
+import Image from "react-bootstrap/Image";
+import Button from "react-bootstrap/Button";
 
 class Saved extends Component {
   state = {
@@ -43,14 +45,15 @@ class Saved extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="sm-12">
-            <Jumbotron>
-              <h1>Saved Books</h1>
+          <Col>
+            <Jumbotron className="text-center">
+              <h1>Google Books Search</h1>
+              <h2>Saved Books</h2>
             </Jumbotron>
           </Col>
         </Row>
         <Row>
-          <Col size="sm-12">
+          <Col>
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
@@ -64,13 +67,14 @@ class Saved extends Component {
                         {book.title} by {book.authors}
                       </a>
                     </strong>
+                    <Image src={book.image} className="float-left mr-4"/>
                     <p>{book.description}</p>
-                    <button onClick={() => this.deleteBook(book._id)}>Delete</button>
+                    <Button className="btn" onClick={() => this.deleteBook(book._id)}>Delete</Button>
                   </ListItem>
                 ))}
               </List>
             ) : (
-              <h3>No Results to Display</h3>
+              <h3 className="text-center">No Results to Display</h3>
             )}
           </Col>
         </Row>
