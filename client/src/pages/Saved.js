@@ -41,6 +41,23 @@ class Saved extends Component {
       .catch(err => console.log(err));
   };
 
+  savedItem = book => (
+    <ListItem key={book._id}>
+      <strong>
+        <a
+          href={book.link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {book.title} by {book.authors}
+        </a>
+      </strong>
+      <Image src={book.image} className="float-left mr-4"/>
+      <p>{book.description}</p>
+      <Button className="btn" onClick={() => this.deleteBook(book._id)}>Delete</Button>
+    </ListItem>
+  )
+
   render() {
     return (
       <Container fluid>
@@ -56,22 +73,7 @@ class Saved extends Component {
           <Col>
             {this.state.books.length ? (
               <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <strong>
-                      <a
-                        href={book.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {book.title} by {book.authors}
-                      </a>
-                    </strong>
-                    <Image src={book.image} className="float-left mr-4"/>
-                    <p>{book.description}</p>
-                    <Button className="btn" onClick={() => this.deleteBook(book._id)}>Delete</Button>
-                  </ListItem>
-                ))}
+                {this.state.books.map(this.savedItem)}
               </List>
             ) : (
               <h3 className="text-center">No Results to Display</h3>

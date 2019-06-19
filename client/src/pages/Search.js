@@ -47,6 +47,28 @@ class Books extends Component {
     });
   };
 
+  listItem = (result, index) => (
+    <ListItem key={result.id}>
+      <a
+        href={result.volumeInfo.infoLink}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <strong>
+          {result.volumeInfo.title} by {result.volumeInfo.authors}
+        </strong>
+      </a>
+      <Image
+        src={result && result.volumeInfo && result.volumeInfo.imageLinks && result.volumeInfo.imageLinks.thumbnail}
+        className="float-left mr-4"
+      />
+      <p>{result.volumeInfo.description}</p>
+      <button className="btn" onClick={this.handleSaveClick} data-i={index}>
+        Save
+      </button>
+    </ListItem>
+  )
+
   render() {
     return (
       <div>
@@ -67,6 +89,7 @@ class Books extends Component {
                 onChange={this.handleInputChange}
                 name="searchTerm"
                 placeholder="Search Term"
+                onSubmit={this.handleFormSubmit}
               />
             </Col>
             <Col xs={2}>
@@ -80,27 +103,7 @@ class Books extends Component {
           </Row>
           {this.state.results.length ? (
             <List>
-              {this.state.results.map((result, index) => (
-                <ListItem key={result.id}>
-                  <a
-                    href={result.volumeInfo.infoLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <strong>
-                      {result.volumeInfo.title} by {result.volumeInfo.authors}
-                    </strong>
-                  </a>
-                  <Image
-                    src={result.volumeInfo.imageLinks.thumbnail}
-                    className="float-left mr-4"
-                  />
-                  <p>{result.volumeInfo.description}</p>
-                  <button className="btn" onClick={this.handleSaveClick} data-i={index}>
-                    Save
-                  </button>
-                </ListItem>
-              ))}
+              {this.state.results.map(this.listItem)}
             </List>
           ) : (
             <h3 className="text-center">No Results to Display</h3>
